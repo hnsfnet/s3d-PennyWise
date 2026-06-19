@@ -1,14 +1,30 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 import { Receipt, PlusCircle } from 'lucide-react';
-import { useTransactionStore, getSortedTransactions } from '@/store/useTransactionStore';
+import {
+  useTransactionStore,
+  getSortedTransactions,
+} from '@/store/useTransactionStore';
+import { useBudgetStore } from '@/store/useBudgetStore';
+import { isCategoryOverBudget } from '@/utils/budget';
 import { TransactionItem } from './TransactionItem';
 
 export function TransactionList() {
   const transactions = useTransactionStore((state) => state.transactions);
+  const deleteTransaction = useTransactionStore(
+    (state) => state.deleteTransaction
+  );
+  const budgets = useBudgetStore((state) => state.budgets);
 
   const sortedTransactions = useMemo(() => {
     return getSortedTransactions(transactions);
   }, [transactions]);
+
+  const handleDelete = useCallback(
+    (id: string) => {
+      deleteTransaction(id);
+    },
+    [deleteTransaction]
+  );
 
   if (sortedTransactions.length === 0) {
     return (
@@ -20,7 +36,7 @@ export function TransactionList() {
           还没有账单记录
         </h3>
         <p className="text-sm text-gray-400 max-w-xs">
-          点击右上角"记一笔"开始记录你的第一笔收支吧
+          点击右上角&quot;记一笔&quot;开始记录你的第一笔收支吧
         </p>
         <div className="mt-6 flex items-center gap-2 text-primary-500">
           <PlusCircle className="w-5 h-5" />
@@ -40,13 +56,27 @@ export function TransactionList() {
       </div>
 
       <div className="space-y-3">
-        {sortedTransactions.map((transaction, index) => (
-          <TransactionItem
-            key={transaction.id}
-            transaction={transaction}
-            index={index}
-          />
-        ))}
+        {sortedTransactions.map((transaction, index) => {
+          const overBudget =
+            transaction.type === 'expense'
+              ? isCategoryOverBudget(
+                  transactions,
+                  budgets,
+                  transaction.category,
+                  transaction.date
+                )
+              : false;
+
+          return (
+            <TransactionItem
+              key={transaction.id}
+              transaction={transaction}
+              index={index}
+              overBudget={overBudget}
+              onDelete={handleDelete}
+            />
+          );
+        })}
       </div>
     </div>
   );

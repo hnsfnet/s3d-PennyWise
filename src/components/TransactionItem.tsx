@@ -1,34 +1,24 @@
-import { useMemo } from 'react';
 import { Trash2, AlertTriangle } from 'lucide-react';
 import type { Transaction } from '@/types';
 import { CategoryIcon } from './CategoryIcon';
 import { getCategoryByKey } from '@/utils/categories';
 import { formatAmount, formatDate } from '@/utils/formatters';
-import { useTransactionStore } from '@/store/useTransactionStore';
-import { useBudgetStore } from '@/store/useBudgetStore';
-import { isCategoryOverBudget } from '@/utils/budget';
 
-interface TransactionItemProps {
+export interface TransactionItemProps {
   transaction: Transaction;
   index: number;
+  overBudget: boolean;
+  onDelete: (id: string) => void;
 }
 
-export function TransactionItem({ transaction, index }: TransactionItemProps) {
-  const deleteTransaction = useTransactionStore((state) => state.deleteTransaction);
-  const transactions = useTransactionStore((state) => state.transactions);
-  const budgets = useBudgetStore((state) => state.budgets);
+export function TransactionItem({ transaction, index, overBudget, onDelete }: TransactionItemProps) {
   const category = getCategoryByKey(transaction.category, transaction.type);
 
   const handleDelete = () => {
     if (window.confirm('确定要删除这条记录吗？')) {
-      deleteTransaction(transaction.id);
+      onDelete(transaction.id);
     }
   };
-
-  const overBudget = useMemo(() => {
-    if (transaction.type !== 'expense') return false;
-    return isCategoryOverBudget(transactions, budgets, transaction.category, transaction.date);
-  }, [transactions, budgets, transaction.category, transaction.date, transaction.type]);
 
   const isIncome = transaction.type === 'income';
   const amountColor = isIncome ? 'text-income' : 'text-expense';
