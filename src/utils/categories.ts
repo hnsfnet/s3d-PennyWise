@@ -1,4 +1,4 @@
-import type { Category } from '@/types';
+import type { Category, TransactionType } from '@/types';
 
 export const expenseCategories: Category[] = [
   { key: 'food', label: '餐饮', icon: 'UtensilsCrossed', color: '#F97316', bgColor: '#FFF7ED' },
@@ -13,11 +13,49 @@ export const incomeCategories: Category[] = [
   { key: 'other', label: '其他', icon: 'Gift', color: '#F59E0B', bgColor: '#FFFBEB' },
 ];
 
-export const getCategoryByKey = (key: string, type: 'income' | 'expense'): Category | undefined => {
-  const categories = type === 'expense' ? expenseCategories : incomeCategories;
-  return categories.find(c => c.key === key);
+const CUSTOM_CATEGORIES_STORAGE_KEY = 'coinkeeper_custom_categories';
+
+interface CustomCategories {
+  expense: Category[];
+  income: Category[];
+}
+
+const loadCustomCategories = (): CustomCategories => {
+  try {
+    const stored = localStorage.getItem(CUSTOM_CATEGORIES_STORAGE_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      return {
+        expense: Array.isArray(parsed.expense) ? parsed.expense : [],
+        income: Array.isArray(parsed.income) ? parsed.income : [],
+      };
+    }
+  } catch (e) {
+    console.error('Failed to load custom categories:', e);
+  }
+  return { expense: [], income: [] };
 };
 
-export const getCategoriesByType = (type: 'income' | 'expense'): Category[] => {
-  return type === 'expense' ? expenseCategories : incomeCategories;
+export const getAllCategoriesByType = (type: TransactionType): Category[] => {
+  const defaultList = type === 'expense' ? expenseCategories : incomeCategories;
+  const custom = loadCustomCategories();
+  return [...defaultList, ...custom[type]];
+};
+
+export const getCategoryByKey = (key: string, type: TransactionType): Category => {
+  const allCategories = getAllCategoriesByType(type);
+  const found = allCategories.find((c) => c.key === key);
+  if (found) return found;
+
+  return {
+    key,
+    label: key,
+    icon: 'Circle',
+    color: '#6B7280',
+    bgColor: '#F3F4F6',
+  };
+};
+
+export const getCategoriesByType = (type: TransactionType): Category[] => {
+  return getAllCategoriesByType(type);
 };

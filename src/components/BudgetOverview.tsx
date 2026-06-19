@@ -7,13 +7,16 @@ import { getBudgetProgressList } from '@/utils/budget';
 import { formatAmount } from '@/utils/formatters';
 import * as Icons from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import { expenseCategories } from '@/utils/categories';
+import { getCategoryByKey } from '@/utils/categories';
 
 const iconMap: Record<string, LucideIcon> = {
   UtensilsCrossed: Icons.UtensilsCrossed,
   Car: Icons.Car,
   ShoppingBag: Icons.ShoppingBag,
   Gamepad2: Icons.Gamepad2,
+  Wallet: Icons.Wallet,
+  Briefcase: Icons.Briefcase,
+  Gift: Icons.Gift,
 };
 
 export function BudgetOverview() {
@@ -118,8 +121,8 @@ export function BudgetOverview() {
 
       <div className="space-y-4">
         {progressList.map((progress) => {
-          const cat = expenseCategories.find((c) => c.key === progress.categoryKey);
-          const IconComponent = cat ? iconMap[cat.icon] || Icons.Circle : Icons.Circle;
+          const cat = getCategoryByKey(progress.categoryKey, 'expense');
+          const IconComponent = iconMap[cat.icon] || Icons.Circle;
 
           return (
             <div key={progress.categoryKey}>

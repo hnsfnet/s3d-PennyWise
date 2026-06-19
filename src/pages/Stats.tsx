@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import {
   PieChart,
   Pie,
@@ -12,10 +12,10 @@ import {
   YAxis,
   CartesianGrid,
 } from 'recharts';
-import { ArrowLeft, PieChart as PieChartIcon, TrendingUp, TrendingDown, Receipt } from 'lucide-react';
+import { ArrowLeft, PieChart as PieChartIcon, TrendingUp, TrendingDown, Receipt, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTransactionStore } from '@/store/useTransactionStore';
-import { getMonthlyStats, getCurrentMonthCategoryStats, getCurrentMonthKey } from '@/utils/budget';
+import { getMonthlyStats, getMonthCategoryStats, getCurrentMonthKey, getMonthTransactions } from '@/utils/budget';
 import { formatAmount } from '@/utils/formatters';
 
 const CustomPieTooltip = ({ active, payload }: any) => {
@@ -71,34 +71,47 @@ const renderCustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent
   );
 };
 
+const formatMonthKeyToLabel = (monthKey: string): string => {
+  const [year, month] = monthKey.split('-');
+  return `${year}年${parseInt(month, 10)}月`;
+};
+
+const shiftMonth = (monthKey: string, delta: number): string => {
+  const [year, month] = monthKey.split('-').map(Number);
+  const date = new Date(year, month - 1 + delta, 1);
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  return `${y}-${m}`;
+};
+
 export default function Stats() {
   const navigate = useNavigate();
   const transactions = useTransactionStore((state) => state.transactions);
+  const [selectedMonth, setSelectedMonth] = useState<string>(getCurrentMonthKey());
 
   const categoryStats = useMemo(() => {
-    return getCurrentMonthCategoryStats(transactions);
-  }, [transactions]);
+    return getMonthCategoryStats(transactions, selectedMonth);
+  }, [transactions, selectedMonth]);
 
   const monthlyStats = useMemo(() => {
     return getMonthlyStats(transactions);
   }, [transactions]);
 
-  const currentMonthStats = useMemo(() => {
-    const currentMonth = getCurrentMonthKey();
-    const monthTx = transactions.filter((t) => t.date.substring(0, 7) === currentMonth);
+  const selectedMonthStats = useMemo(() => {
+    const monthTx = getMonthTransactions(transactions, selectedMonth);
     const income = monthTx.filter((t) => t.type === 'income').reduce((s, t) => s + t.amount, 0);
     const expense = monthTx.filter((t) => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
-    const total = transactions.length;
+    const total = monthTx.length;
     return { income, expense, total };
-  }, [transactions]);
+  }, [transactions, selectedMonth]);
 
-  const currentMonthLabel = useMemo(() => {
-    const now = new Date();
-    return `${now.getFullYear()}年${now.getMonth() + 1}月`;
-  }, []);
+  const currentMonthLabel = useMemo(() => formatMonthKeyToLabel(selectedMonth), [selectedMonth]);
+
+  const handlePrevMonth = () => setSelectedMonth((m) => shiftMonth(m, -1));
+  const handleNextMonth = () => setSelectedMonth((m) => shiftMonth(m, 1));
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-10">
       <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3">
           <button
@@ -112,31 +125,51 @@ export default function Stats() {
       </header>
 
       <main className="max-w-2xl mx-auto px-4 py-6 space-y-6">
-        <div className="grid grid-cols-3 gap-3">
-          <div className="bg-white rounded-2xl p-4 shadow-sm">
-            <div className="flex items-center gap-1.5 mb-2">
-              <Receipt className="w-4 h-4 text-gray-400" />
-              <span className="text-xs text-gray-500">本月笔数</span>
+        <div className="bg-white rounded-2xl p-4 shadow-sm">
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <button
+              onClick={handlePrevMonth}
+              className="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5 text-gray-500" />
+            </button>
+            <div className="px-4 py-1.5 bg-primary-50 rounded-lg">
+              <span className="text-base font-bold text-primary-600">{currentMonthLabel}</span>
             </div>
-            <p className="text-2xl font-bold text-gray-800">{currentMonthStats.total}</p>
+            <button
+              onClick={handleNextMonth}
+              className="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center hover:bg-gray-100 transition-colors"
+            >
+              <ChevronRight className="w-5 h-5 text-gray-500" />
+            </button>
           </div>
-          <div className="bg-white rounded-2xl p-4 shadow-sm">
-            <div className="flex items-center gap-1.5 mb-2">
-              <TrendingUp className="w-4 h-4 text-income" />
-              <span className="text-xs text-gray-500">本月收入</span>
+
+          <div className="grid grid-cols-3 gap-3">
+            <div className="bg-gray-50 rounded-xl p-3">
+              <div className="flex items-center gap-1.5 mb-2">
+                <Receipt className="w-4 h-4 text-gray-400" />
+                <span className="text-xs text-gray-500">记录笔数</span>
+              </div>
+              <p className="text-2xl font-bold text-gray-800">{selectedMonthStats.total}</p>
             </div>
-            <p className="text-2xl font-bold text-income">
-              ¥{formatAmount(currentMonthStats.income)}
-            </p>
-          </div>
-          <div className="bg-white rounded-2xl p-4 shadow-sm">
-            <div className="flex items-center gap-1.5 mb-2">
-              <TrendingDown className="w-4 h-4 text-expense" />
-              <span className="text-xs text-gray-500">本月支出</span>
+            <div className="bg-gray-50 rounded-xl p-3">
+              <div className="flex items-center gap-1.5 mb-2">
+                <TrendingUp className="w-4 h-4 text-income" />
+                <span className="text-xs text-gray-500">收入</span>
+              </div>
+              <p className="text-2xl font-bold text-income">
+                ¥{formatAmount(selectedMonthStats.income)}
+              </p>
             </div>
-            <p className="text-2xl font-bold text-expense">
-              ¥{formatAmount(currentMonthStats.expense)}
-            </p>
+            <div className="bg-gray-50 rounded-xl p-3">
+              <div className="flex items-center gap-1.5 mb-2">
+                <TrendingDown className="w-4 h-4 text-expense" />
+                <span className="text-xs text-gray-500">支出</span>
+              </div>
+              <p className="text-2xl font-bold text-expense">
+                ¥{formatAmount(selectedMonthStats.expense)}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -148,7 +181,7 @@ export default function Stats() {
 
           {categoryStats.length === 0 ? (
             <div className="h-64 flex flex-col items-center justify-center">
-              <p className="text-gray-400 text-sm">本月还没有支出记录</p>
+              <p className="text-gray-400 text-sm">该月暂无支出记录</p>
             </div>
           ) : (
             <>

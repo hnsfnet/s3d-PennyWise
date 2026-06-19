@@ -33,11 +33,6 @@ const iconSizeClasses = {
 
 export function CategoryIcon({ categoryKey, type, size = 'md' }: CategoryIconProps) {
   const category = getCategoryByKey(categoryKey, type);
-
-  if (!category) {
-    return null;
-  }
-
   const IconComponent = iconMap[category.icon] || Icons.Circle;
 
   return (

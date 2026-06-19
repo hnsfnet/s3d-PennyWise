@@ -50,7 +50,7 @@ export function TransactionItem({ transaction, index }: TransactionItemProps) {
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-0.5">
           <span className={`font-semibold truncate ${categoryLabelColor}`}>
-            {category?.label || '未分类'}
+            {category.label}
           </span>
           {overBudget && (
             <span className="flex items-center gap-0.5 px-1.5 py-0.5 bg-red-100 text-expense text-xs font-medium rounded">

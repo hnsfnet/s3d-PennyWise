@@ -6,6 +6,7 @@ import type { TransactionType, FormErrors } from '@/types';
 import { getCategoriesByType } from '@/utils/categories';
 import { getTodayDateString } from '@/utils/formatters';
 import { useTransactionStore } from '@/store/useTransactionStore';
+import { useCategoryStore } from '@/store/useCategoryStore';
 import type { Category } from '@/types';
 
 interface TransactionFormProps {
@@ -25,6 +26,7 @@ const iconMap: Record<string, LucideIcon> = {
 
 export function TransactionForm({ isOpen, onClose }: TransactionFormProps) {
   const addTransaction = useTransactionStore((state) => state.addTransaction);
+  const getAllCategories = useCategoryStore((state) => state.getAllCategories);
 
   const [type, setType] = useState<TransactionType>('expense');
   const [amount, setAmount] = useState('');
@@ -35,7 +37,7 @@ export function TransactionForm({ isOpen, onClose }: TransactionFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [shakeField, setShakeField] = useState<string | null>(null);
 
-  const categories = getCategoriesByType(type);
+  const categories = getAllCategories(type);
 
   const resetForm = useCallback(() => {
     setType('expense');

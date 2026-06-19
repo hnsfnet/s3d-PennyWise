@@ -1,5 +1,5 @@
 import type { Transaction, BudgetProgress, MonthlyStat, CategoryStat } from '@/types';
-import { expenseCategories, getCategoryByKey } from './categories';
+import { getCategoryByKey, getAllCategoriesByType } from './categories';
 import type { BudgetData } from '@/types';
 
 export const getCurrentMonthKey = (): string => {
@@ -50,16 +50,26 @@ export const getBudgetProgressList = (
 ): BudgetProgress[] => {
   const monthKey = getCurrentMonthKey();
 
-  return expenseCategories
-    .map((cat) => {
-      const budget = budgets[cat.key] || 0;
-      const spent = getCategoryMonthSpent(transactions, cat.key, monthKey);
+  const allExpenseCategories = getAllCategoriesByType('expense');
+  const categoryKeysFromBudgets = Object.keys(budgets);
+  const categoryKeysFromSpent = new Set(
+    getMonthTransactions(transactions, monthKey)
+      .filter((t) => t.type === 'expense')
+      .map((t) => t.category)
+  );
+  const allKeys = Array.from(new Set([...allExpenseCategories.map((c) => c.key), ...categoryKeysFromBudgets, ...categoryKeysFromSpent]));
+
+  return allKeys
+    .map((key) => {
+      const cat = getCategoryByKey(key, 'expense');
+      const budget = budgets[key] || 0;
+      const spent = getCategoryMonthSpent(transactions, key, monthKey);
       const remaining = budget - spent;
       const percentage = budget > 0 ? Math.min((spent / budget) * 100, 100) : 0;
       const isOverBudget = budget > 0 && spent > budget;
 
       return {
-        categoryKey: cat.key,
+        categoryKey: key,
         categoryLabel: cat.label,
         color: cat.color,
         bgColor: cat.bgColor,
@@ -118,10 +128,10 @@ export const getMonthlyStats = (transactions: Transaction[]): MonthlyStat[] => {
   });
 };
 
-export const getCurrentMonthCategoryStats = (
-  transactions: Transaction[]
+export const getMonthCategoryStats = (
+  transactions: Transaction[],
+  monthKey: string
 ): CategoryStat[] => {
-  const monthKey = getCurrentMonthKey();
   const monthExpenses = getMonthTransactions(transactions, monthKey).filter(
     (t) => t.type === 'expense'
   );
@@ -138,10 +148,16 @@ export const getCurrentMonthCategoryStats = (
     .map(([key, value]) => {
       const cat = getCategoryByKey(key, 'expense');
       return {
-        name: cat?.label || key,
+        name: cat.label,
         value,
-        color: cat?.color || '#9CA3AF',
+        color: cat.color,
       };
     })
     .sort((a, b) => b.value - a.value);
+};
+
+export const getCurrentMonthCategoryStats = (
+  transactions: Transaction[]
+): CategoryStat[] => {
+  return getMonthCategoryStats(transactions, getCurrentMonthKey());
 };
