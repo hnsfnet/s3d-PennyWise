@@ -1,0 +1,36 @@
+﻿
+ RUN  v4.1.9 C:/Users/snail/Documents/TraeSolo/repos/repo-11
+
+ ❯ src/tests/store/useTransactionStore.test.ts (13 tests | 3 failed) 90ms
+       × 新增一笔账单后列表应该多一条 26ms
+       × 应该正确删除指定的交易记录 4ms
+       × 应该清空所有交易记录 3ms
+ ❯ src/tests/components/MonthlyTrendChart.test.tsx (5 tests | 1 failed) 135ms
+     × 数据应该传递给图表组件 21ms
+ ❯ src/tests/components/TransactionForm.test.tsx (12 tests | 1 failed) 2461ms
+     × 金额为负数时提交应该显示错误 1099ms
+ ❯ src/tests/store/useBudgetStore.test.ts (11 tests | 7 failed) 52ms
+       × 应该正确设置指定分类的预算 22ms
+       × 金额为 0 或负数时应该删除该分类预算 3ms
+       × 应该支持更新已有分类的预算 2ms
+       × 应该批量设置多个分类的预算 2ms
+       × 应该过滤掉金额为 0 或负数的预算 1ms
+       × 应该正确删除指定分类的预算 2ms
+       × 应该清空所有预算 6ms
+ ❯ src/tests/integration/full-flow.test.tsx (10 tests | 10 failed) 51302ms
+     × 记一笔餐饮支出后，账单列表应该出现这条记录 5054ms
+     × 记一笔餐饮支出后，统计页饼图餐饮分类金额应该增加 5029ms
+     × 记一笔餐饮支出后，预算页餐饮进度条应该更新 5023ms
+     × 首页预算总览应该显示餐饮支出进度 5037ms
+     × 超支时应该显示超支警告 5995ms
+     × 初始显示当月（6月）数据，只包含6月的支出 5046ms
+     × 切换到上月（5月）后，只显示5月数据 5027ms
+     × 切回当月（6月）后数据恢复 5039ms
+     × 近6个月趋势图应该包含5月和6月的数据 5023ms
+     × 切换月份后，支出总金额应该更新 5022ms
+
+ Test Files  5 failed | 5 passed (10)
+      Tests  22 failed | 79 passed (101)
+   Start at  13:34:46
+   Duration  61.32s (transform 2.60s, setup 13.56s, import 10.25s, tests 55.04s, environment 37.09s)
+

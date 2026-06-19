@@ -19,7 +19,7 @@ export const formatDate = (dateStr: string): string => {
 
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  const weekDays = ['周日', '周一', '周二', '周三', '周三', '周五', '周六'];
+  const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
   const weekDay = weekDays[date.getDay()];
 
   return `${month}月${day}日 ${weekDay}`;

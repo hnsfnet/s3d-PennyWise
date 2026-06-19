@@ -173,7 +173,6 @@ export function TransactionForm({ isOpen, onClose }: TransactionFormProps) {
               <input
                 type="number"
                 step="0.01"
-                min="0"
                 value={amount}
                 onChange={(e) => {
                   setAmount(e.target.value);

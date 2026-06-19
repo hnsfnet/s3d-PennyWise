@@ -1,0 +1,424 @@
+
+ RUN  v4.1.9 C:/Users/snail/Documents/TraeSolo/repos/repo-11
+
+ ✓ src/tests/components/TransactionForm.test.tsx > TransactionForm > isOpen 为 false 时不渲染任何内容 88ms
+ ✓ src/tests/components/BudgetBar.test.tsx > BudgetBar > 应该正确显示分类名称和金额 265ms
+ ✓ src/tests/components/BudgetBar.test.tsx > BudgetBar > 未超支时应该显示剩余金额和百分比 29ms
+ ✓ src/tests/components/BudgetBar.test.tsx > BudgetBar > 超支时应该显示超支金额和红色样式 48ms
+ ✓ src/tests/components/BudgetBar.test.tsx > BudgetBar > 超支时应该显示警告图标 39ms
+ ✓ src/tests/components/TransactionForm.test.tsx > TransactionForm > isOpen 为 true 时渲染表单 241ms
+ ✓ src/tests/components/BudgetBar.test.tsx > BudgetBar > 进度条宽度应该等于 percentage 120ms
+ ✓ src/tests/components/BudgetBar.test.tsx > BudgetBar > 未超支时进度条应该是主色调 16ms
+ ✓ src/tests/components/TransactionItem.test.tsx > TransactionItem > 应该正确渲染支出记录的金额（红色，带负号） 400ms
+ ✓ src/tests/components/TransactionItem.test.tsx > TransactionItem > 应该正确渲染收入记录的金额（绿色，带正号） 33ms
+ ✓ src/tests/components/TransactionItem.test.tsx > TransactionItem > 应该正确渲染分类标签 17ms
+ ✓ src/tests/components/TransactionItem.test.tsx > TransactionItem > 超支时应该显示红色超支标签和警告图标 33ms
+ ✓ src/tests/components/TransactionForm.test.tsx > TransactionForm > 金额为空时提交应该显示错误 175ms
+ ✓ src/tests/components/BudgetBar.test.tsx > BudgetBar > 超支时进度条应该是红色 127ms
+ ✓ src/tests/components/BudgetBar.test.tsx > BudgetBar > 百分比超过 100% 时进度条宽度应该为 100% 17ms
+ ✓ src/tests/components/TransactionItem.test.tsx > TransactionItem > 超支时卡片边框应该为红色 18ms
+ ✓ src/tests/components/TransactionItem.test.tsx > TransactionItem > 点击删除按钮应该调用 onDelete 回调 54ms
+ ✓ src/tests/store/useTransactionStore.test.ts > useTransactionStore > addTransaction > 新增一笔账单后列表应该多一条 118ms
+ ✓ src/tests/store/useTransactionStore.test.ts > useTransactionStore > addTransaction > 应该正确保存到 localStorage 2ms
+ ✓ src/tests/store/useTransactionStore.test.ts > useTransactionStore > addTransaction > 金额校验应该拒绝非正数 3ms
+ ✓ src/tests/store/useTransactionStore.test.ts > useTransactionStore > deleteTransaction > 应该正确删除指定的交易记录 2ms
+ ✓ src/tests/store/useTransactionStore.test.ts > useTransactionStore > deleteTransaction > 删除不存在的 ID 应该不报错 1ms
+ ✓ src/tests/store/useTransactionStore.test.ts > useTransactionStore > getTotalIncome > 应该正确计算总收入 4ms
+ ✓ src/tests/store/useTransactionStore.test.ts > useTransactionStore > getTotalIncome > 没有收入时应该返回 0 2ms
+ ✓ src/tests/store/useTransactionStore.test.ts > useTransactionStore > getTotalExpense > 应该正确计算总支出 3ms
+ ✓ src/tests/store/useTransactionStore.test.ts > useTransactionStore > getTotalExpense > 没有支出时应该返回 0 2ms
+ ✓ src/tests/store/useTransactionStore.test.ts > useTransactionStore > getBalance > 应该正确计算余额（总收入 - 总支出） 2ms
+ ✓ src/tests/store/useTransactionStore.test.ts > useTransactionStore > getBalance > 支出大于收入时余额应该为负数 1ms
+ ✓ src/tests/store/useTransactionStore.test.ts > useTransactionStore > clearAll > 应该清空所有交易记录 2ms
+ ✓ src/tests/store/useTransactionStore.test.ts > useTransactionStore > getSortedTransactions > 应该按日期倒序排列，日期相同按创建时间倒序 63ms
+ ✓ src/tests/components/TransactionForm.test.tsx > TransactionForm > 金额为 0 时提交应该显示错误 127ms
+ ✓ src/tests/components/TransactionItem.test.tsx > TransactionItem > 取消删除时不应该调用 onDelete 106ms
+ ✓ src/tests/components/TransactionItem.test.tsx > TransactionItem > 收入记录即使 overBudget 为 true 也不应该显示超支标签 35ms
+ ✓ src/tests/components/TransactionForm.test.tsx > TransactionForm > 金额为负数时提交应该显示错误 210ms
+ ✓ src/tests/components/TransactionForm.test.tsx > TransactionForm > 金额为非数字时提交应该显示错误 126ms
+ ✓ src/tests/components/TransactionForm.test.tsx > TransactionForm > 未选择分类时提交应该显示错误 158ms
+ ✓ src/tests/components/TransactionForm.test.tsx > TransactionForm > 金额和分类都正确时应该调用 addTransaction 并关闭表单 588ms
+ ✓ src/tests/components/TransactionForm.test.tsx > TransactionForm > 切换类型时应该清空已选分类 193ms
+ ✓ src/tests/components/TransactionForm.test.tsx > TransactionForm > 点击关闭按钮应该调用 onClose 278ms
+ ✓ src/tests/components/TransactionForm.test.tsx > TransactionForm > 金额输入有效时应该清除金额错误 88ms
+ ✓ src/tests/components/TransactionForm.test.tsx > TransactionForm > 选择分类后应该清除分类错误 83ms
+stderr | src/tests/components/ExpensePieChart.test.tsx > ExpensePieChart > 应该渲染分类图例列表
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ ✓ src/tests/components/ExpensePieChart.test.tsx > ExpensePieChart > 数据为空时应该显示空状态提示 72ms
+stderr | src/tests/components/MonthlyTrendChart.test.tsx > MonthlyTrendChart > 应该渲染折线图容器
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+stderr | src/tests/components/ExpensePieChart.test.tsx > ExpensePieChart > 应该正确显示各分类金额
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+stderr | src/tests/components/MonthlyTrendChart.test.tsx > MonthlyTrendChart > 应该包含 Recharts 图表组件
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ ✓ src/tests/components/MonthlyTrendChart.test.tsx > MonthlyTrendChart > 应该渲染折线图容器 88ms
+stderr | src/tests/components/MonthlyTrendChart.test.tsx > MonthlyTrendChart > 空数据时也应该渲染图表容器
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+stderr | src/tests/components/MonthlyTrendChart.test.tsx > MonthlyTrendChart > 单月数据时也应该正常渲染
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+stderr | src/tests/components/MonthlyTrendChart.test.tsx > MonthlyTrendChart > 数据应该传递给图表组件
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ ✓ src/tests/components/MonthlyTrendChart.test.tsx > MonthlyTrendChart > 应该包含 Recharts 图表组件 12ms
+ ✓ src/tests/components/MonthlyTrendChart.test.tsx > MonthlyTrendChart > 空数据时也应该渲染图表容器 12ms
+ ✓ src/tests/components/MonthlyTrendChart.test.tsx > MonthlyTrendChart > 单月数据时也应该正常渲染 11ms
+ × src/tests/components/MonthlyTrendChart.test.tsx > MonthlyTrendChart > 数据应该传递给图表组件 25ms
+   → [2mexpect([22m[31mreceived[39m[2m).toBeInTheDocument()[22m
+
+[31mreceived[39m value must be an HTMLElement or an SVGElement.
+Received has type:  Null
+Received has value: [31mnull[39m
+stderr | src/tests/components/ExpensePieChart.test.tsx > ExpensePieChart > 图例颜色应该与数据中的颜色一致
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ ✓ src/tests/components/ExpensePieChart.test.tsx > ExpensePieChart > 应该渲染分类图例列表 127ms
+ ✓ src/tests/components/ExpensePieChart.test.tsx > ExpensePieChart > 应该正确显示各分类金额 23ms
+stderr | src/tests/components/ExpensePieChart.test.tsx > ExpensePieChart > 应该渲染饼图容器
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ ✓ src/tests/components/ExpensePieChart.test.tsx > ExpensePieChart > 图例颜色应该与数据中的颜色一致 119ms
+stderr | src/tests/components/ExpensePieChart.test.tsx > ExpensePieChart > 单条数据时也应该正常渲染
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ ✓ src/tests/components/ExpensePieChart.test.tsx > ExpensePieChart > 应该渲染饼图容器 166ms
+ ✓ src/tests/components/ExpensePieChart.test.tsx > ExpensePieChart > 单条数据时也应该正常渲染 10ms
+ ✓ src/tests/utils/formatters.test.ts > formatters > formatAmount > 应该正确格式化整数金额为两位小数 27ms
+ ✓ src/tests/utils/formatters.test.ts > formatters > formatAmount > 应该正确格式化小数金额 1ms
+ ✓ src/tests/utils/formatters.test.ts > formatters > formatAmount > 应该正确格式化大额金额（带千分位） 1ms
+ ✓ src/tests/utils/formatters.test.ts > formatters > formatDate > 应该返回"今天"当日期是今天时 1ms
+ ✓ src/tests/utils/formatters.test.ts > formatters > formatDate > 应该返回"昨天"当日期是昨天时 1ms
+ ✓ src/tests/utils/formatters.test.ts > formatters > formatDate > 应该返回格式化的日期当日期是其他时间时 1ms
+ ✓ src/tests/utils/formatters.test.ts > formatters > getTodayDateString > 应该返回 YYYY-MM-DD 格式的今天日期 1ms
+ ✓ src/tests/utils/formatters.test.ts > formatters > generateId > 应该生成唯一的 ID 1ms
+ ✓ src/tests/store/useBudgetStore.test.ts > useBudgetStore > setBudget > 应该正确设置指定分类的预算 6ms
+ ✓ src/tests/store/useBudgetStore.test.ts > useBudgetStore > setBudget > 金额为 0 或负数时应该删除该分类预算 2ms
+ ✓ src/tests/store/useBudgetStore.test.ts > useBudgetStore > setBudget > 应该支持更新已有分类的预算 1ms
+ ✓ src/tests/store/useBudgetStore.test.ts > useBudgetStore > setBudgets > 应该批量设置多个分类的预算 2ms
+ ✓ src/tests/store/useBudgetStore.test.ts > useBudgetStore > setBudgets > 应该过滤掉金额为 0 或负数的预算 2ms
+ ✓ src/tests/store/useBudgetStore.test.ts > useBudgetStore > getBudget > 应该正确返回指定分类的预算 0ms
+ ✓ src/tests/store/useBudgetStore.test.ts > useBudgetStore > getBudget > 未设置预算的分类应该返回 0 0ms
+ ✓ src/tests/store/useBudgetStore.test.ts > useBudgetStore > clearBudget > 应该正确删除指定分类的预算 1ms
+ ✓ src/tests/store/useBudgetStore.test.ts > useBudgetStore > clearBudget > 删除不存在的分类应该不报错 2ms
+ ✓ src/tests/store/useBudgetStore.test.ts > useBudgetStore > clearAllBudgets > 应该清空所有预算 2ms
+ ✓ src/tests/store/useBudgetStore.test.ts > useBudgetStore > localStorage 持久化 > 应该从 localStorage 加载初始数据 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getMonthKey > 应该从日期字符串提取 YYYY-MM 格式的月份 8ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getCurrentMonthKey > 应该返回当前月份的 YYYY-MM 格式 3ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getMonthTransactions > 应该只返回指定月份的交易记录 4ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getMonthTransactions > 当没有指定月份的交易时应该返回空数组 2ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getCategoryMonthSpent > 应该正确计算指定分类在指定月份的总支出 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getCategoryMonthSpent > 不应该包含收入记录 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getCategoryMonthSpent > 不应该包含其他月份的支出 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getCategoryMonthSpent > 当没有支出时应该返回 0 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > isCategoryOverBudget > 当支出超过预算时应该返回 true 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > isCategoryOverBudget > 当支出未超过预算时应该返回 false 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > isCategoryOverBudget > 当预算为 0 或未设置时应该返回 false 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > isCategoryOverBudget > 应该只统计指定月份的支出 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getBudgetProgressList > 应该返回正确的预算进度列表 4ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getBudgetProgressList > 超支时 remaining 应该为负数 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getMonthlyStats > 应该返回近6个月的收支统计 2ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getMonthlyStats > 没有数据的月份应该返回 0 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getMonthCategoryStats > 应该返回指定月份各分类的支出统计 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getMonthCategoryStats > 应该按金额从大到小排序 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getMonthCategoryStats > 不应该包含收入记录 1ms
+ ✓ src/tests/utils/budget.test.ts > budget utils > getMonthCategoryStats > 不应该包含其他月份的记录 1ms
+ × src/tests/integration/full-flow.test.tsx > 集成测试：记账到统计联动流程 > 记一笔餐饮支出后，账单列表应该出现这条记录 10056ms
+   → Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ × src/tests/integration/full-flow.test.tsx > 集成测试：记账到统计联动流程 > 记一笔餐饮支出后，统计页饼图餐饮分类金额应该增加 10014ms
+   → Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ × src/tests/integration/full-flow.test.tsx > 集成测试：记账到统计联动流程 > 记一笔餐饮支出后，预算页餐饮进度条应该更新 10009ms
+   → Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ × src/tests/integration/full-flow.test.tsx > 集成测试：记账到统计联动流程 > 首页预算总览应该显示餐饮支出进度 10044ms
+   → Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+stderr | src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 初始显示当月（6月）数据，只包含6月的支出
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ × src/tests/integration/full-flow.test.tsx > 集成测试：记账到统计联动流程 > 超支时应该显示超支警告 10068ms
+   → Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+stderr | src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 初始显示当月（6月）数据，只包含6月的支出
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+stderr | src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 切换到上月（5月）后，只显示5月数据
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ × src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 初始显示当月（6月）数据，只包含6月的支出 10014ms
+   → Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+stderr | src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 切换到上月（5月）后，只显示5月数据
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+stderr | src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 切回当月（6月）后数据恢复
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ × src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 切换到上月（5月）后，只显示5月数据 10018ms
+   → Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+stderr | src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 切回当月（6月）后数据恢复
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+stderr | src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 近6个月趋势图应该包含5月和6月的数据
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ × src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 切回当月（6月）后数据恢复 10022ms
+   → Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+stderr | src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 近6个月趋势图应该包含5月和6月的数据
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+stderr | src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 切换月份后，支出总金额应该更新
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ × src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 近6个月趋势图应该包含5月和6月的数据 10014ms
+   → Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+stderr | src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 切换月份后，支出总金额应该更新
+The width(-1) and height(-1) of chart should be greater than 0,
+       please check the style of container, or the props width(100%) and height(100%),
+       or add a minWidth(0) or minHeight(undefined) or use aspect(undefined) to control the
+       height and width.
+
+ × src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 切换月份后，支出总金额应该更新 10016ms
+   → Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 11 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/tests/components/MonthlyTrendChart.test.tsx > MonthlyTrendChart > 数据应该传递给图表组件
+Error: [2mexpect([22m[31mreceived[39m[2m).toBeInTheDocument()[22m
+
+[31mreceived[39m value must be an HTMLElement or an SVGElement.
+Received has type:  Null
+Received has value: [31mnull[39m
+ ❯ src/tests/components/MonthlyTrendChart.test.tsx:47:17
+     45|     expect(rechartsContainer).toBeInTheDocument();
+     46|     const svg = container.querySelector('svg');
+     47|     expect(svg).toBeInTheDocument();
+       |                 ^
+     48|   });
+     49| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/11]⎯
+
+ FAIL  src/tests/integration/full-flow.test.tsx > 集成测试：记账到统计联动流程 > 记一笔餐饮支出后，账单列表应该出现这条记录
+Error: Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/tests/integration/full-flow.test.tsx:41:3
+     39|   });
+     40|
+     41|   it('记一笔餐饮支出后，账单列表应该出现这条记录', { timeout: 10000 }, async () => {
+       |   ^
+     42|     renderWithRouter('/');
+     43|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/11]⎯
+
+ FAIL  src/tests/integration/full-flow.test.tsx > 集成测试：记账到统计联动流程 > 记一笔餐饮支出后，统计页饼图餐饮分类金额应该增加
+Error: Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/tests/integration/full-flow.test.tsx:75:3
+     73|   });
+     74|
+     75|   it('记一笔餐饮支出后，统计页饼图餐饮分类金额应该增加', { timeout: 10000 }, async () => {
+       |   ^
+     76|     renderWithRouter('/');
+     77|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/11]⎯
+
+ FAIL  src/tests/integration/full-flow.test.tsx > 集成测试：记账到统计联动流程 > 记一笔餐饮支出后，预算页餐饮进度条应该更新
+Error: Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/tests/integration/full-flow.test.tsx:110:3
+    108|   });
+    109|
+    110|   it('记一笔餐饮支出后，预算页餐饮进度条应该更新', { timeout: 10000 }, async () => {
+       |   ^
+    111|     renderWithRouter('/');
+    112|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/11]⎯
+
+ FAIL  src/tests/integration/full-flow.test.tsx > 集成测试：记账到统计联动流程 > 首页预算总览应该显示餐饮支出进度
+Error: Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/tests/integration/full-flow.test.tsx:145:3
+    143|   });
+    144|
+    145|   it('首页预算总览应该显示餐饮支出进度', { timeout: 10000 }, async () => {
+       |   ^
+    146|     renderWithRouter('/');
+    147|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/11]⎯
+
+ FAIL  src/tests/integration/full-flow.test.tsx > 集成测试：记账到统计联动流程 > 超支时应该显示超支警告
+Error: Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/tests/integration/full-flow.test.tsx:174:3
+    172|   });
+    173|
+    174|   it('超支时应该显示超支警告', { timeout: 10000 }, async () => {
+       |   ^
+    175|     renderWithRouter('/');
+    176|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/11]⎯
+
+ FAIL  src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 初始显示当月（6月）数据，只包含6月的支出
+Error: Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/tests/integration/full-flow.test.tsx:249:3
+    247|   });
+    248|
+    249|   it('初始显示当月（6月）数据，只包含6月的支出', { timeout: 10000 }, async () => {
+       |   ^
+    250|     renderWithRouter('/stats');
+    251|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/11]⎯
+
+ FAIL  src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 切换到上月（5月）后，只显示5月数据
+Error: Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/tests/integration/full-flow.test.tsx:267:3
+    265|   });
+    266|
+    267|   it('切换到上月（5月）后，只显示5月数据', { timeout: 10000 }, async () => {
+       |   ^
+    268|     renderWithRouter('/stats');
+    269|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/11]⎯
+
+ FAIL  src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 切回当月（6月）后数据恢复
+Error: Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/tests/integration/full-flow.test.tsx:290:3
+    288|   });
+    289|
+    290|   it('切回当月（6月）后数据恢复', { timeout: 10000 }, async () => {
+       |   ^
+    291|     renderWithRouter('/stats');
+    292|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/11]⎯
+
+ FAIL  src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 近6个月趋势图应该包含5月和6月的数据
+Error: Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/tests/integration/full-flow.test.tsx:318:3
+    316|   });
+    317|
+    318|   it('近6个月趋势图应该包含5月和6月的数据', { timeout: 10000 }, async () => {
+       |   ^
+    319|     renderWithRouter('/stats');
+    320|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/11]⎯
+
+ FAIL  src/tests/integration/full-flow.test.tsx > 集成测试：按月筛选功能 > 切换月份后，支出总金额应该更新
+Error: Test timed out in 10000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ src/tests/integration/full-flow.test.tsx:328:3
+    326|   });
+    327|
+    328|   it('切换月份后，支出总金额应该更新', { timeout: 10000 }, async () => {
+       |   ^
+    329|     renderWithRouter('/stats');
+    330|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/11]⎯
+
+
+ Test Files  2 failed | 8 passed (10)
+      Tests  11 failed | 90 passed (101)
+   Start at  13:54:28
+   Duration  114.61s (transform 5.25s, setup 17.00s, import 22.40s, tests 105.12s, environment 43.33s)
+

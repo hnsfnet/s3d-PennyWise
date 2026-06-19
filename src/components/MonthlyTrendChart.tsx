@@ -34,7 +34,7 @@ export interface MonthlyTrendChartProps {
 export function MonthlyTrendChart({ data }: MonthlyTrendChartProps) {
   return (
     <div className="h-72">
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="100%" minWidth={100} minHeight={100}>
         <LineChart data={data} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" vertical={false} />
           <XAxis
