@@ -22,3 +22,32 @@ export interface FormErrors {
   amount?: string;
   category?: string;
 }
+
+export interface BudgetData {
+  [categoryKey: string]: number;
+}
+
+export interface BudgetProgress {
+  categoryKey: string;
+  categoryLabel: string;
+  color: string;
+  bgColor: string;
+  budget: number;
+  spent: number;
+  remaining: number;
+  percentage: number;
+  isOverBudget: boolean;
+}
+
+export interface MonthlyStat {
+  month: string;
+  monthLabel: string;
+  income: number;
+  expense: number;
+}
+
+export interface CategoryStat {
+  name: string;
+  value: number;
+  color: string;
+}

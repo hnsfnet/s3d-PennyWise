@@ -1,9 +1,12 @@
-import { Trash2 } from 'lucide-react';
+import { useMemo } from 'react';
+import { Trash2, AlertTriangle } from 'lucide-react';
 import type { Transaction } from '@/types';
 import { CategoryIcon } from './CategoryIcon';
 import { getCategoryByKey } from '@/utils/categories';
 import { formatAmount, formatDate } from '@/utils/formatters';
 import { useTransactionStore } from '@/store/useTransactionStore';
+import { useBudgetStore } from '@/store/useBudgetStore';
+import { isCategoryOverBudget } from '@/utils/budget';
 
 interface TransactionItemProps {
   transaction: Transaction;
@@ -12,6 +15,8 @@ interface TransactionItemProps {
 
 export function TransactionItem({ transaction, index }: TransactionItemProps) {
   const deleteTransaction = useTransactionStore((state) => state.deleteTransaction);
+  const transactions = useTransactionStore((state) => state.transactions);
+  const budgets = useBudgetStore((state) => state.budgets);
   const category = getCategoryByKey(transaction.category, transaction.type);
 
   const handleDelete = () => {
@@ -20,13 +25,20 @@ export function TransactionItem({ transaction, index }: TransactionItemProps) {
     }
   };
 
+  const overBudget = useMemo(() => {
+    if (transaction.type !== 'expense') return false;
+    return isCategoryOverBudget(transactions, budgets, transaction.category, transaction.date);
+  }, [transactions, budgets, transaction.category, transaction.date, transaction.type]);
+
   const isIncome = transaction.type === 'income';
   const amountColor = isIncome ? 'text-income' : 'text-expense';
   const amountPrefix = isIncome ? '+' : '-';
+  const categoryLabelColor = overBudget ? 'text-expense' : 'text-gray-800';
+  const cardBorderColor = overBudget ? 'border border-red-200 bg-red-50/30' : '';
 
   return (
     <div
-      className="group flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 animate-slide-up"
+      className={`group flex items-center gap-4 p-4 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 animate-slide-up ${cardBorderColor}`}
       style={{ animationDelay: `${index * 30}ms` }}
     >
       <CategoryIcon
@@ -37,9 +49,15 @@ export function TransactionItem({ transaction, index }: TransactionItemProps) {
 
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-0.5">
-          <span className="font-semibold text-gray-800 truncate">
+          <span className={`font-semibold truncate ${categoryLabelColor}`}>
             {category?.label || '未分类'}
           </span>
+          {overBudget && (
+            <span className="flex items-center gap-0.5 px-1.5 py-0.5 bg-red-100 text-expense text-xs font-medium rounded">
+              <AlertTriangle className="w-3 h-3" />
+              超支
+            </span>
+          )}
         </div>
         {transaction.note && (
           <p className="text-sm text-gray-500 truncate">
